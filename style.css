@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Estilos para la barra de navegación superior */
+.navbar {
+    background-color: #004669; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    z-index: 1000; 
+    padding: 0 20px; 
+    height: 50px; 
+    display: flex; 
+    align-items: center; 
+    overflow: visible; 
+}
+
+/* Estilos para el menu */
+.nav-menu {
+    display: flex; 
+    list-style-type: none;
+    margin: 0;
+    justify-content: flex-start; 
+    padding: 0; 
+    overflow: visible; 
+    flex-wrap: nowrap; 
+    white-space: nowrap; 
+}
+
+.nav-menu li {
+    margin-right: 5px; 
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px; 
+    line-height: 30px; 
+    transition: color 0.5s;
+    font-family: 'Roboto', sans-serif;
+}
+
+.nav-menu a:hover {
+    color: #F1C40F;
+    background-color: #004669;
+    border-radius: 25px;
+}
+
+/* Menú hamburguesa */
+.hamburger {
+    display: none; 
+    font-size: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ffcc00;
+    line-height: 30px; 
+}
+
+/* Responsive cambio de tamaño de pantallas */
+@media (max-width: 1000px) {
+    .nav-menu {
+        display: none; 
+        flex-direction: column; 
+        position: fixed;
+        background-color: #004669;
+        width: 250px;
+        height: 100%;
+        top: 0;
+        left: -250px;
+        transition: left 0.3s;
+        padding: 10px; 
+        min-height: 60px; 
+    }
+
+    .nav-menu.active {
+        left: 0; 
+        display: flex; 
+    }
+
+    .hamburger {
+        display: block; 
+        line-height: 30px; 
+    }
+}
+
+body {
+    min-height: 100%;        
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+/* Estilos para el contenido principal */
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex: 1;
+}
+
+/* Estilos para el pie de página */
+.footer {
+    position: relative;       
+    left: 0;                  
+    right: 0;                 
+    bottom: 0;                
+    background-color: #004669;
+    color: white;
+    text-align: center;
+    padding: 0;
+    height: 30px;
+    margin: 0;                
+    box-sizing: border-box;   
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;     
+    width: 100%;  
+}
+
+.footer p {
+    font-size: 0.8em;
+    margin: 0;        
+}
+
+/* Estilos para las secciones */
+section {
+    margin-top: 0; 
+    padding-top: 40px; 
+}
+
+/* Estilos para los titulos */
+h1 {
+    font-size: 2em; 
+    color: #004669; 
+    margin-top: 20px; 
+}
+
+h2 {
+    font-size: 1.5em; 
+    color: #004669; 
+    margin-top: 15px; 
+}
+
+h4 {
+    font-size: 1.1em; 
+    color: #004669; 
+    margin-top: 20px; 
+}
+
+/* Estilos para los parrafos */
+p {
+    font-size: 1.1em; 
+    max-width: 800px; 
+    margin: 0 auto; 
+    line-height: 1.6; 
+    padding: 0 20px; 
+}
+
+/* Estilos para la barra divisoria entre secciones */
+.section-divider {
+    border: none; 
+    height: 2px; 
+    background-color: #004669; 
+    margin: 20px 0; 
+    width: 75%; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+/* Estilos para las listas */
+ul {
+    list-style-type: disc; 
+    padding-left: 20px; 
+    text-align: left; 
+    margin: 0 auto; 
+    max-width: 600px; 
+}
+
+ul li {
+    margin: 5px 0; 
+    font-size: 1.1em; 
+}
+
+/* Estilos para el contendenor de imagenes*/
+.image-container {
+    display: flex; 
+    justify-content: center; 
+    align-items: flex-start; 
+    margin-top: 40px; 
+    flex-wrap: nowrap; 
+}
+
+.inline-image {
+    max-width: 45%; 
+    height: auto; 
+    margin: 0 2.5%; 
+    flex: 0 1 auto; 
+    object-fit: contain; 
+}
+
+/* Estilos para el contenedor de contacto */
+.contacto {
+    background-color: #004669; 
+    color: white; 
+    padding: 20px; 
+    margin-top: 20px; 
+}
+
+.contacto h4 {
+    color: white;
+}
