@@ -2,217 +2,297 @@
 
 /* Estilos para la barra de navegación superior */
 .navbar {
-    background-color: #004669; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    z-index: 1000; 
-    padding: 0 20px; 
-    height: 50px; 
-    display: flex; 
-    align-items: center; 
-    overflow: visible; 
+    background-color: #004669; /* Color de fondo de la barra de navegación */
+    position: fixed; /* Fija la barra en la parte superior de la ventana */
+    top: 0; /* Posiciona la barra en la parte superior */
+    left: 0; /* Alinea la barra al lado izquierdo */
+    right: 0; /* Alinea la barra al lado derecho */
+    z-index: 1000; /* Asegura que la barra esté por encima de otros elementos */
+    padding: 0 20px; /* Espaciado interno horizontal de 20px */
+    height: 50px; /* Altura de la barra de navegación */
+    display: flex; /* Utiliza flexbox para alinear los elementos dentro de la barra */
+    align-items: center; /* Centra verticalmente los elementos dentro de la barra */
+    justify-content: flex-start; 
+    overflow: visible; /* Permite que el contenido desbordado sea visible */
 }
 
-/* Estilos para el menu */
+/* Estilos para el menú */
 .nav-menu {
-    display: flex; 
-    list-style-type: none;
-    margin: 0;
-    justify-content: flex-start; 
-    padding: 0; 
-    overflow: visible; 
-    flex-wrap: nowrap; 
-    white-space: nowrap; 
+    display: flex; /* Utiliza flexbox para alinear los elementos del menú */
+    list-style-type: none; /* Elimina los puntos de la lista */
+    margin: 0; /* Elimina el margen por defecto */
+    padding: 0; /* Elimina el padding por defecto */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: visible; /* Permite que el contenido desbordado sea visible */
+    flex-wrap: nowrap; /* Evita que los elementos se envuelvan en varias líneas */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    flex-grow: 1; /* Permite que el menú ocupe el espacio restante */
 }
 
 .nav-menu li {
-    margin-right: 5px; 
+    margin-right: 20px; /* Espaciado a la derecha entre los elementos del menú */
+    align-items: center;
 }
 
 .nav-menu a {
-    color: white;
-    text-decoration: none;
-    padding: 10px; 
-    line-height: 30px; 
-    transition: color 0.5s;
-    font-family: 'Roboto', sans-serif;
+    color: white; /* Color del texto de los enlaces */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    padding: 10px; /* Espaciado interno de 10px alrededor del texto */
+    line-height: 30px; /* Altura de línea para alinear verticalmente el texto */
+    transition: color 0.5s; /* Transición suave para el cambio de color */
+    font-family: 'Roboto', sans-serif; /* Fuente utilizada para el texto */
 }
 
 .nav-menu a:hover {
-    color: #F1C40F;
-    background-color: #004669;
-    border-radius: 25px;
+    color: #F1C40F; /* Color del texto al pasar el mouse sobre el enlace */
+    background-color: #004669; /* Color de fondo al pasar el mouse sobre el enlace */
+    border-radius: 25px; /* Bordes redondeados para el fondo del enlace */
 }
 
 /* Menú hamburguesa */
 .hamburger {
-    display: none; 
-    font-size: 30px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #ffcc00;
-    line-height: 30px; 
+    display: none; /* Oculta el menú hamburguesa por defecto */
+    font-size: 30px; /* Tamaño de la fuente del icono de menú hamburguesa */
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor a puntero al pasar el mouse */
+    color: #ffcc00; /* Color del icono de menú hamburguesa */
+    line-height: 30px; /* Altura de línea para alinear verticalmente el icono */
+    margin-left: 10px; /* Alinea el ícono a la izquierda con un margen */
 }
 
 /* Responsive cambio de tamaño de pantallas */
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
     .nav-menu {
-        display: none; 
-        flex-direction: column; 
-        position: fixed;
-        background-color: #004669;
-        width: 250px;
-        height: 100%;
-        top: 0;
-        left: -250px;
-        transition: left 0.3s;
-        padding: 10px; 
-        min-height: 60px; 
+        display: none; /* Oculta el menú en pantallas pequeñas */
+        flex-direction: column; /* Cambia la dirección del menú a columna */
+        position: fixed; /* Fija el menú en la pantalla */
+        background-color: #004669; /* Color de fondo del menú */
+        width: 250px; /* Ancho del menú */
+        height: 100%; /* Altura del menú */
+        top: 0; /* Posiciona el menú en la parte superior */
+        left: -250px; /* Inicialmente oculta el menú fuera de la pantalla */
+        transition: left 0.3s; /* Transición suave para mostrar el menú */
+        padding: 10px; /* Espaciado interno del menú */
+        min-height: 60px; /* Altura mínima del menú */
+        transform: none;
     }
 
     .nav-menu.active {
-        left: 0; 
-        display: flex; 
+        left: 0; /* Mueve el menú a la vista cuando está activo */
+        display: flex; /* Muestra el menú */
+        transform: none;
     }
 
     .hamburger {
-        display: block; 
-        line-height: 30px; 
+        display: block; /* Muestra el menú hamburguesa en pantallas pequeñas */
+        line-height: 30px; /* Altura de línea para alinear verticalmente el icono */
     }
 }
 
 body {
-    min-height: 100%;        
-    display: flex;
-    flex-direction: column;
-    margin: 0;
+    min-height: 100%; /* Asegura que el cuerpo ocupe al menos el 100% de la altura de la ventana */
+    display: flex; /* Utiliza flexbox para organizar el contenido */
+    flex-direction: column; /* Organiza el contenido en una columna */
+    margin: 0; /* Elimina el margen por defecto */
 }
 
 /* Estilos para el contenido principal */
 .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    flex: 1;
+    display: flex; /* Utiliza flexbox para organizar el contenido principal */
+    flex-direction: column; /* Organiza el contenido en una columna */
+    align-items: center; /* Centra horizontalmente los elementos dentro del contenedor */
+    text-align: center; /* Centra el texto dentro del contenedor */
+    padding: 20px; /* Espaciado interno de 20px */
+    max-width: 1200px; /* Ancho máximo del contenido principal */
+    margin: 0 auto; /* Centra el contenido principal horizontalmente */
+    flex: 1; /* Permite que el contenido principal crezca y ocupe el espacio disponible */
 }
 
 /* Estilos para el pie de página */
 .footer {
-    position: relative;       
-    left: 0;                  
-    right: 0;                 
-    bottom: 0;                
-    background-color: #004669;
-    color: white;
-    text-align: center;
-    padding: 0;
-    height: 30px;
-    margin: 0;                
-    box-sizing: border-box;   
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-x: hidden;     
-    width: 100%;  
+    position: relative; /* Posición relativa para el pie de página */
+    left: 0; /* Alinea el pie de página al lado izquierdo */
+    right: 0; /* Alinea el pie de página al lado derecho */
+    bottom: 0; /* Alinea el pie de página en la parte inferior */
+    background-color: #004669; /* Color de fondo del pie de página */
+    color: white; /* Color del texto del pie de página */
+    text-align: center; /* Centra el texto dentro del pie de página */
+    padding: 0; /* Sin espaciado interno */
+    height: 30px; /* Altura del pie de página */
+    margin: 0; /* Sin margen */
+    box-sizing: border-box; /* Incluye el padding y el borde en el tamaño total */
+    font-family: 'Roboto', sans-serif; /* Fuente utilizada para el texto del pie de página */
+    display: flex; /* Utiliza flexbox para organizar el contenido del pie de página */
+    justify-content: center; /* Centra horizontalmente el contenido del pie de página */
+    align-items: center; /* Centra verticalmente el contenido del pie de página */
+    overflow-x: hidden; /* Oculta el desbordamiento horizontal */
+    width: 100%; /* Ancho del pie de página */
 }
 
 .footer p {
-    font-size: 0.8em;
-    margin: 0;        
+    font-size: 0.8em; /* Tamaño de fuente del texto en el pie de página */
+    margin: 0; /* Sin margen */
 }
 
 /* Estilos para las secciones */
 section {
-    margin-top: 0; 
-    padding-top: 40px; 
+    margin-top: 0; /* Sin margen superior */
+    padding-top: 40px; /* Espaciado superior de 40px */
 }
 
-/* Estilos para los titulos */
+/* Estilos para los títulos */
+h1, h2, h4 {
+    text-align: center; /* Centra los títulos */
+    margin: 0; /* Elimina márgenes para un mejor centrado */
+    width: 100%; /* Asegura que ocupen todo el ancho */
+}
+
 h1 {
-    font-size: 2em; 
-    color: #004669; 
-    margin-top: 20px; 
+    font-size: 2.5em; /* Tamaño de fuente del título principal */
+    color: #004669; /* Color del texto del título */
+    margin-top: 20px; /* Margen superior de 20px */
+    margin-bottom: 10px; /* Margen inferior de 10px */
+    font-weight: bold; /* Negrita para el título */
 }
 
 h2 {
-    font-size: 1.5em; 
-    color: #004669; 
-    margin-top: 15px; 
+    font-size: 2em; /* Tamaño de fuente del segundo título */
+    color: #004669; /* Color del texto del segundo título */
+    margin-top: 15px; /* Margen superior de 15px */
+    margin-bottom: 10px; /* Margen inferior de 10px */
+    font-weight: bold; /* Negrita para el segundo título */
 }
 
 h4 {
-    font-size: 1.1em; 
-    color: #004669; 
-    margin-top: 20px; 
+    font-size: 1.3em; /* Tamaño de fuente del cuarto título */
+    color: #004669; /* Color del texto del cuarto título */
+    margin-top: 20px; /* Margen superior de 20px */
+    margin-bottom: 10px; /* Margen inferior de 10px */
 }
 
-/* Estilos para los parrafos */
+/* Estilos para los párrafos */
 p {
-    font-size: 1.1em; 
-    max-width: 800px; 
-    margin: 0 auto; 
-    line-height: 1.6; 
-    padding: 0 20px; 
+    font-size: 1.1em; /* Tamaño de fuente de los párrafos */
+    max-width: 800px; /* Ancho máximo de los párrafos */
+    margin: 0 auto; /* Centra los párrafos horizontalmente */
+    line-height: 1.8; /* Altura de línea para mejorar la legibilidad */
+    padding: 0 20px; /* Espaciado interno horizontal de 20px */
+    margin-bottom: 15px; /* Margen inferior de 15px */
+    text-align: center; /* Centra el texto de los párrafos */
 }
 
 /* Estilos para la barra divisoria entre secciones */
 .section-divider {
-    border: none; 
-    height: 2px; 
-    background-color: #004669; 
-    margin: 20px 0; 
-    width: 75%; 
-    margin-left: auto; 
-    margin-right: auto; 
+    border: none; /* Sin borde */
+    height: 2px; /* Altura de la barra divisoria */
+    background-color: #004669; /* Color de fondo de la barra divisoria */
+    margin: 20px 0; /* Margen superior e inferior de 20px */
+    width: 75%; /* Ancho de la barra divisoria */
+    margin-left: auto; /* Centra la barra divisoria horizontalmente */
+    margin-right: auto; /* Centra la barra divisoria horizontalmente */
 }
 
-/* Estilos para las listas */
-ul {
-    list-style-type: disc; 
-    padding-left: 20px; 
-    text-align: left; 
-    margin: 0 auto; 
-    max-width: 600px; 
+/* Estilos para las listas personalizadas */
+.custom-list {
+    background-color: rgba(240, 240, 240, 0.9); /* Fondo gris claro */
+    border: 1px solid #004669; /* Borde */
+    padding: 10px; /* Espaciado interno */
+    margin: 10px auto; /* Espaciado externo, centrado horizontalmente */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    max-width: 600px; /* Ancho máximo del contenedor */
 }
 
-ul li {
-    margin: 5px 0; 
-    font-size: 1.1em; 
+.custom-list ul {
+    list-style-type: disc; /* Tipo de lista */
+    padding-left: 20px; /* Espaciado a la izquierda */
+    margin: 0; /* Sin margen */
 }
 
-/* Estilos para el contendenor de imagenes*/
+.custom-list li {
+    margin: 5px 0; /* Espaciado entre elementos de la lista */
+    font-size: 1.1em; /* Tamaño de fuente */
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+/* Estilos para el contenedor de imágenes */
 .image-container {
     display: flex; 
-    justify-content: center; 
-    align-items: flex-start; 
-    margin-top: 40px; 
-    flex-wrap: nowrap; 
+    justify-content: center; /* Centra las imágenes horizontalmente */
+    align-items: flex-start; /* Alinea las imágenes al inicio del contenedor */
+    margin-top: 40px; /* Margen superior de 40px */
+    flex-wrap: nowrap; /* Evita que las imágenes se envuelvan en varias líneas */
 }
 
 .inline-image {
-    max-width: 45%; 
-    height: auto; 
-    margin: 0 2.5%; 
-    flex: 0 1 auto; 
-    object-fit: contain; 
+    max-width: 45%; /* Ancho máximo de las imágenes en línea */
+    height: auto; /* Mantiene la proporción de las imágenes */
+    margin: 0 2.5%; /* Margen horizontal de 2.5% */
+    flex: 0 1 auto; /* Permite que las imágenes se ajusten automáticamente */
+    object-fit: contain; /* Mantiene la proporción de las imágenes dentro del contenedor */
 }
 
 /* Estilos para el contenedor de contacto */
 .contacto {
-    background-color: #004669; 
-    color: white; 
-    padding: 20px; 
-    margin-top: 20px; 
+    background-color: #004669; /* Color de fondo del contenedor de contacto */
+    color: #004669; /* Color del texto en el contenedor de contacto */
+    padding: 20px; /* Espaciado interno de 20px */
+    margin-top: 20px; /* Margen superior de 20px */
 }
 
 .contacto h4 {
-    color: white;
+    color: white; /* Color del texto del encabezado en el contenedor de contacto */
+}
+
+/* Estilos para el contenido de las secciones */
+.section-content {
+    margin: 20px 0; /* Margen superior e inferior de 20px */
+    padding: 20px; /* Espaciado interno de 20px */
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estilos para el contenedor de párrafos */
+.paragraph-container {
+    background-color: rgba(240, 240, 240, 0.8); /* Fondo gris claro */
+    border-left: 5px solid #004669; /* Borde izquierdo */
+    padding: 15px; /* Espaciado interno */
+    margin: 10px 0; /* Espaciado externo */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estilos para el contenedor de secciones 1 */
+.section-container-1 {
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco con opacidad */
+    border: 1px solid #00466923; /* Borde */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    margin: 20px auto; /* Espaciado externo, centrado horizontalmente */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    max-width: 1200px; /* Aumentar ancho máximo del contenedor */
+}
+
+/* Estilos para el contenedor de secciones 2 */
+.section-container-2 {
+    background-color: rgba(240, 240, 240, 0.9); /* Fondo gris claro */
+    border: 1px solid #ffc4004d; /* Borde azul */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    margin: 20px auto; /* Espaciado externo, centrado horizontalmente */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    max-width: 1200px; /* Aumentar ancho máximo del contenedor */
+}
+
+/* Estilos para las imágenes */
+img {
+    transition: transform 0.3s ease; /* Suaviza la transición del tamaño */
+}
+
+img:hover {
+    transform: scale(1.05); /* Aumenta el tamaño de la imagen al 105% al pasar el mouse */
 }
