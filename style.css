@@ -53,14 +53,16 @@
 
 /* Menú hamburguesa */
 .hamburger {
-    display: none; /* Oculta el menú hamburguesa por defecto */
+    display: block; /* Muestra el menú hamburguesa en pantallas pequeñas */
     font-size: 30px; /* Tamaño de la fuente del icono de menú hamburguesa */
     background: none; /* Sin fondo */
     border: none; /* Sin borde */
     cursor: pointer; /* Cambia el cursor a puntero al pasar el mouse */
     color: #ffcc00; /* Color del icono de menú hamburguesa */
-    line-height: 30px; /* Altura de línea para alinear verticalmente el icono */
+    line-height: 50px; /* Alinea verticalmente el ícono con la altura de la barra de navegación */
     margin-left: 10px; /* Alinea el ícono a la izquierda con un margen */
+    position: absolute; /* Cambia a posición absoluta */
+    left: 20px; /* Alinea el menú hamburguesa a la izquierda */
 }
 
 /* Responsive cambio de tamaño de pantallas */
@@ -84,11 +86,6 @@
         left: 0; /* Mueve el menú a la vista cuando está activo */
         display: flex; /* Muestra el menú */
         transform: none;
-    }
-
-    .hamburger {
-        display: block; /* Muestra el menú hamburguesa en pantallas pequeñas */
-        line-height: 30px; /* Altura de línea para alinear verticalmente el icono */
     }
 }
 
@@ -120,8 +117,7 @@ body {
     background-color: #004669; /* Color de fondo del pie de página */
     color: white; /* Color del texto del pie de página */
     text-align: center; /* Centra el texto dentro del pie de página */
-    padding: 0; /* Sin espaciado interno */
-    height: 30px; /* Altura del pie de página */
+    padding: 10px 0; /* Espaciado interno para permitir más espacio */
     margin: 0; /* Sin margen */
     box-sizing: border-box; /* Incluye el padding y el borde en el tamaño total */
     font-family: 'Roboto', sans-serif; /* Fuente utilizada para el texto del pie de página */
@@ -134,7 +130,12 @@ body {
 
 .footer p {
     font-size: 0.8em; /* Tamaño de fuente del texto en el pie de página */
-    margin: 0; /* Sin margen */
+    margin: 10px 0; /* Aumenta el margen superior e inferior */
+    line-height: 1; /* Aumenta la altura de línea para más espacio entre líneas */
+}
+
+.footer p:first-child {
+    margin-bottom: 10px; /* Aumenta el margen inferior solo para el primer párrafo */
 }
 
 /* Estilos para las secciones */
@@ -221,18 +222,20 @@ p {
 /* Estilos para el contenedor de imágenes */
 .image-container {
     display: flex; 
+    flex-direction: column; /* Cambia a columna para que las imágenes se apilen verticalmente */
     justify-content: center; /* Centra las imágenes horizontalmente */
-    align-items: flex-start; /* Alinea las imágenes al inicio del contenedor */
+    align-items: center; /* Alinea las imágenes al centro */
     margin-top: 40px; /* Margen superior de 40px */
-    flex-wrap: nowrap; /* Evita que las imágenes se envuelvan en varias líneas */
 }
 
-.inline-image {
-    max-width: 45%; /* Ancho máximo de las imágenes en línea */
-    height: auto; /* Mantiene la proporción de las imágenes */
-    margin: 0 2.5%; /* Margen horizontal de 2.5% */
-    flex: 0 1 auto; /* Permite que las imágenes se ajusten automáticamente */
-    object-fit: contain; /* Mantiene la proporción de las imágenes dentro del contenedor */
+/* Estilos para las imágenes en dispositivos móviles */
+@media (max-width: 600px) {
+    .inline-image {
+        max-width: 100%; /* Usa todo el ancho disponible */
+        height: auto; /* Mantiene la proporción correcta */
+        margin: 5px 0; /* Ajusta el margen */
+        object-fit: cover; /* Asegura que la imagen cubra bien sin cortarse */
+    }
 }
 
 /* Estilos para el contenedor de contacto */
@@ -266,33 +269,44 @@ p {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
-/* Estilos para el contenedor de secciones 1 */
-.section-container-1 {
+/* Unificar estilos de contenedores */
+.section-container {
     background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco con opacidad */
-    border: 1px solid #00466923; /* Borde */
     border-radius: 8px; /* Bordes redondeados */
     padding: 20px; /* Espaciado interno */
     margin: 20px auto; /* Espaciado externo, centrado horizontalmente */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    max-width: 1200px; /* Aumentar ancho máximo del contenedor */
+    max-width: 1200px; /* Ancho máximo del contenedor */
 }
 
-/* Estilos para el contenedor de secciones 2 */
-.section-container-2 {
-    background-color: rgba(240, 240, 240, 0.9); /* Fondo gris claro */
-    border: 1px solid #ffc4004d; /* Borde azul */
-    border-radius: 8px; /* Bordes redondeados */
-    padding: 20px; /* Espaciado interno */
-    margin: 20px auto; /* Espaciado externo, centrado horizontalmente */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    max-width: 1200px; /* Aumentar ancho máximo del contenedor */
+/* Aplicar la clase unificada a las secciones */
+.section-container-1, .section-container-2 {
+    composes: section-container; /* Usar la clase unificada */
 }
 
-/* Estilos para las imágenes */
+/* Estilos para imágenes */
 img {
+    max-width: 100%; /* Asegura que las imágenes no se salgan del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
     transition: transform 0.3s ease; /* Suaviza la transición del tamaño */
 }
 
 img:hover {
     transform: scale(1.05); /* Aumenta el tamaño de la imagen al 105% al pasar el mouse */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Cambia la dirección de la barra de navegación en pantallas pequeñas */
+    }
+
+    .nav-menu {
+        flex-direction: column; /* Cambia el menú a columna en pantallas pequeñas */
+        align-items: center; /* Centra los elementos del menú */
+    }
+
+    .hamburger {
+        display: block; /* Muestra el menú hamburguesa en pantallas pequeñas */
+    }
 }
