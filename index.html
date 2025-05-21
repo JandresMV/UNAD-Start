@@ -19,30 +19,53 @@
         <button class="hamburger" id="hamburger">&#9776;</button>
         <nav>
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#matricula">Proceso de Matrícula</a></li>
-                <li><a href="#servicios">Servicios Académicos</a></li>
-                <li><a href="#plataformas">Plataformas Virtuales</a></li>
-                <li><a href="#extracurriculares">Actividades Extracurriculares</a></li>
-                <li><a href="#soporte">Atención y Soporte</a></li>
+                <li><a href="#introduccion" title="Ir a la sección de Inicio">Inicio</a></li>
+                <li><a href="#matricula" title="Ir a la sección Proceso de Matrícula">Proceso de Matrícula</a></li>
+                <li><a href="#servicios" title="Ir a la sección Servicios Académicos">Servicios Académicos</a></li>
+                <li><a href="#plataformas" title="Ir a la sección Plataformas Virtuales">Plataformas Virtuales</a></li>
+                <li><a href="#extracurriculares" title="Ir a la sección Actividades Extracurriculares">Actividades Extracurriculares</a></li>
+                <li><a href="#soporte" title="Ir a la sección Atención y Soporte">Atención y Soporte</a></li>
             </ul>
         </nav>
+        <div class="right-icons-container">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Buscar...">
+                <i class="fas fa-search" id="search-icon"></i>
+            </div>
+            <button id="btn-contraste" class="btn-contraste" aria-label="Activar alto contraste">&#127769;</button>
+        </div>
     </div>
 </header>
 
 <main class="main">
+    <section id="introduccion" class="section-content section-container-1">
+        <h1>Bienvenido a UNAD Start</h1>
+        <div class="paragraph-container">
+            <p>Este sitio te guía a través de los servicios esenciales de la UNAD para facilitar tu inicio y permanencia académica.</p>
+        </div>
+        <button id="btn-ayuda" class="btn-ayuda">¿Cómo navegar el sitio?</button>
+        <div id="ayuda-navegacion" class="ayuda-navegacion hidden">
+            <h3>Navegación del Sitio</h3>
+            <p>Utiliza el menú en la parte superior (o el menú hamburguesa en dispositivos móviles) para saltar directamente a las secciones de interés: Proceso de Matrícula, Servicios Académicos, Plataformas Virtuales, Actividades Extracurriculares y Atención y Soporte.</p>
+            <p>Puedes desplazarte hacia abajo para explorar todo el contenido en orden.</p>
+            <p>Haz clic en los enlaces externos (marcados en amarillo o con íconos) para acceder a recursos adicionales en el sitio oficial de la UNAD.</p>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
     <section id="inicio" class="section-content section-container-1">
-        <h1>Bienvenidos a UNAD Start</h1>
+        
         <div class="paragraph-container">
             <p>Este es un espacio para descubrir y aprovechar todos los servicios institucionales que la UNAD tiene para ofrecer. Se invita a explorar los recursos, plataformas y actividades para facilitar el proceso académico desde el primer día. La Universidad está aquí para acompañar en cada paso del camino universitario. ¡Comience la aventura académica ahora!</p>
         </div>
-        <img src="Images/InicioUnadStart.jpg" alt="Bienvenido a UNAD Start" class="inline-image">
+        <img src="Images/InicioUnadStart.webp" alt="Imagen de Bienvenido a UNAD Start" class="inline-image">
     </section>
     <hr class="section-divider">
 
     <section id="matricula" class="section-container-2">
         <h1>📝 Proceso de Matrícula Pregrado</h1>
-        <img src="Images/Inscripciones-y-matriculas.jpg" alt="Inscripciones y matrículas" class="inline-image">
+        <img src="Images/Inscripciones-y-matriculas.webp" alt="Imagen de Inscripciones y matrículas" class="inline-image">
         <h2>Requisitos para la Inscripción:</h2>
         <div class="custom-list">
             <ul>
@@ -99,7 +122,7 @@
         <div class="paragraph-container">
             <p>Acceda a miles de recursos digitales, libros electrónicos y bases de datos académicas para enriquecer sus estudios. La biblioteca virtual está disponible las 24 horas del día, los 7 días de la semana.</p>
         </div>
-        <img src="Images/biblioteca.jpg" alt="Biblioteca Virtual" class="inline-image">
+        <img src="Images/biblioteca.webp" alt="Imagen de Biblioteca Virtual" class="inline-image">
         <div class="paragraph-container">
             <p>La e-Biblioteca es un área de apoyo estratégico para la comunidad universitaria, orientada a fortalecer la formación e investigación a través de servicios basados en tecnologías de la información y comunicación. Su objetivo es promover un autoaprendizaje significativo tanto a nivel personal como profesional.</p>
         </div>
@@ -107,7 +130,7 @@
         <iframe width="80%" height="400" src="https://www.youtube.com/embed/YteV9Ih9hnw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         
         <h2>Consejería Académica: Su Guía en la UNAD</h2>
-        <img src="Images/Concejeria-Academica.jpg" alt="Consejería Académica" class="inline-image">
+        <img src="Images/Concejeria-Academica.webp" alt="Imagen de Consejería Académica" class="inline-image">
         <div class="paragraph-container">
             <p>La Consejería Académica en la UNAD está diseñada para acompañar y orientar durante el proceso formativo. Este servicio ayuda a tomar decisiones acertadas sobre el plan de estudios, manejar eficazmente el tiempo y superar desafíos académicos. Los consejeros académicos están preparados para brindar asesoría personalizada y estrategias para mantener un rendimiento óptimo.</p>
         </div>
@@ -122,7 +145,7 @@
         </div>
         
         <div class="paragraph-container">
-            <p>¡Descubra más! Visite la <a href="https://academia.unad.edu.co/pregrado-posgrado/atencion/consejeria-academica#:~:text=La%20Consejer%C3%ADa%20acad%C3%A9mica%20es%20un,permanecer%20y%20tener%20%C3%A9xito%20acad%C3%A9mico." target="_blank">página completa</a> para conocer todos los detalles sobre la Consejería Académica y cómo acceder a este servicio.</p>
+            <p>¡Descubra más! Visite la <a href="https://academia.unad.edu.co/pregrado-posgrado/atencion/consejeria-academica#:~:text=La%20Consejer%C3%ADa%20acad%C3%A9mica%20es%20un,permanecer%20y%20tener%20%C3%A9xito%20acad%C3%A9mico." target="_blank" title="Ir a la página completa de Consejería Académica en el sitio de la UNAD (se abre en una nueva pestaña)">página completa</a> para conocer todos los detalles sobre la Consejería Académica y cómo acceder a este servicio.</p>
         </div>
         <div class="paragraph-container">
             <p>¡No se pierda el video! Explore en profundidad cómo la Consejería Académica puede ayudarle a alcanzar el éxito. ⬇️</p>
@@ -134,13 +157,13 @@
     <section id="plataformas" class="section-container-2">
         <h1>🌐 Plataformas Virtuales</h1>
         <h2>Campus Virtual:</h2>
-        <img src="Images/Campus.png" alt="Campus Virtual" class="inline-image">
+        <img src="Images/Campus.webp" alt="Imagen de Campus Virtual" class="inline-image">
         <div class="paragraph-container">
             <p>Gestione sus cursos, revise sus calificaciones y manténgase al tanto de sus actividades académicas desde cualquier dispositivo con acceso a internet.</p>
         </div>
-        <img src="Images/Acceso-campus.png" alt="Acceso Campus" class="inline-image">
+        <img src="Images/Acceso-campus.webp" alt="Imagen de Acceso Campus" class="inline-image">
         <div class="paragraph-container">
-            <p>Acceda al Campus Virtual desde <a href="https://campus.unad.edu.co/" target="_blank">AQUÍ</a>.</p>
+            <p>Acceda al Campus Virtual desde <a href="https://campus.unad.edu.co/" target="_blank" title="Acceder al Campus Virtual de la UNAD (se abre en una nueva pestaña)">AQUÍ</a>.</p>
         </div>
 
         <h2>Aula Virtual:</h2>
@@ -149,8 +172,8 @@
         </div>
 
         <div class="image-container">
-            <img src="Images/Foro.png" alt="Foro" class="inline-image">
-            <img src="Images/entrega.png" alt="Entrega" class="inline-image">
+            <img src="Images/Foro.webp" alt="Imagen de Foro" class="inline-image">
+            <img src="Images/entrega.webp" alt="Imagen de Entrega" class="inline-image">
         </div>
     </section>
     <hr class="section-divider">
@@ -158,17 +181,17 @@
     <section id="extracurriculares" class="section-container-1">
         <h1> Actividades Extracurriculares</h1>
         <h2>Grupos y Semilleros:</h2>
-        <img src="Images/grupos-semilleros.jpg" alt="Grupos y Semilleros" class="inline-image">
+        <img src="Images/grupos-semilleros.webp" alt="Imagen de Grupos y Semilleros" class="inline-image">
         <div class="paragraph-container">
             <p>Los grupos de investigación y los semilleros de investigación son comunidades de aprendizaje de la Universidad Nacional Abierta y a Distancia (UNAD).</p> 
         </div>
         <div class="paragraph-container">
             <p>Únase a grupos de investigación y semilleros para desarrollar proyectos innovadores y compartir conocimientos con otros estudiantes apasionados.</p>
         </div>
-        <h4>Acceda a los grupos y semilleros de investigación <a href="https://investigacion.unad.edu.co/" target="_blank">AQUÍ</a>.</h4>
+        <h4>Acceda a los grupos y semilleros de investigación <a href="https://investigacion.unad.edu.co/" target="_blank" title="Acceder a los grupos y semilleros de investigación de la UNAD (se abre en una nueva pestaña)">AQUÍ</a>.</h4>
         
         <h2>Eventos y Talleres:</h2>
-        <img src="Images/eventos-talleres.jpg" alt="Eventos y Talleres" class="inline-image">
+        <img src="Images/eventos-talleres.webp" alt="Imagen de Eventos y Talleres" class="inline-image">
         <div class="paragraph-container">
             <p>¡La vida universitaria en la UNAD va más allá de las aulas! La Universidad invita a explorar y participar en los eventos y talleres diseñados especialmente para complementar la formación académica. Estos espacios son ideales para conocer a otros estudiantes, intercambiar ideas y desarrollar nuevas habilidades.</p>
         </div>
@@ -179,7 +202,7 @@
             <b>Conferencias y seminarios:</b> Mantente actualizado con las últimas tendencias y avances.<br><br>
             <b>Eventos culturales y deportivos:</b> Vive una experiencia universitaria completa.<br><br>
             🔍 ¡Encuentra lo que necesitas fácilmente!<br><br>
-            Explora la página oficial de eventos <a href="https://eventos.unad.edu.co/" target="_blank">AQUÍ</a> y utiliza los filtros disponibles para buscar por tipo de evento, área académica y fecha. Así podrás encontrar rápidamente las actividades que mejor se adapten a tus intereses.<br>
+            Explora la página oficial de eventos <a href="https://eventos.unad.edu.co/" target="_blank" title="Explorar la página oficial de eventos de la UNAD (se abre en una nueva pestaña)">AQUÍ</a> y utiliza los filtros disponibles para buscar por tipo de evento, área académica y fecha. Así podrás encontrar rápidamente las actividades que mejor se adapten a tus intereses.<br>
             </p>
         </div>
 
@@ -192,13 +215,13 @@
     <section id="soporte" class="section-container-2">
         <h1>📞 Atención y Soporte</h1>
         <h2>Preguntas Frecuentes:</h2>
-        <img src="Images/preguntas.jpg" alt="Preguntas Frecuentes" class="inline-image">
+        <img src="Images/preguntas.webp" alt="Imagen de Preguntas Frecuentes" class="inline-image">
         <div class="paragraph-container">
-            <p>Consulte <a href="https://sai.unad.edu.co/preguntas-frecuentes" target="_blank">AQUÍ</a> las respuestas a las preguntas más comunes sobre el uso de plataformas, procesos académicos y servicios de la UNAD.</p>
+            <p>Consulte <a href="https://sai.unad.edu.co/preguntas-frecuentes" target="_blank" title="Consultar las preguntas frecuentes en el sitio de la UNAD (se abre en una nueva pestaña)">AQUÍ</a> las respuestas a las preguntas más comunes sobre el uso de plataformas, procesos académicos y servicios de la UNAD.</p>
         </div>
         
         <h2>Centro de Atención al Usuario:</h2>
-        <img src="Images/Atencion-soporte.jpg" alt="Atención y Soporte" class="inline-image">
+        <img src="Images/Atencion-soporte.webp" alt="Imagen de Atención y Soporte" class="inline-image">
         <div class="paragraph-container">
             <p>Resuelva sus dudas rápidamente a través de nuestros canales de soporte: chat en línea, correo electrónico y llamadas telefónicas. La Universidad está para ayudarle.</p>
         </div>
@@ -212,15 +235,15 @@
             </div>
             <!-- Agregar íconos de contacto -->
             <div class="contact-icons">
-                <a href="https://api.whatsapp.com/send/?phone=5713759500&text=Hola&type=phone_number&app_absent=0" target="_blank">
+                <a href="https://api.whatsapp.com/send/?phone=5713759500&text=Hola&type=phone_number&app_absent=0" target="_blank" title="Contactar por WhatsApp (se abre en una nueva pestaña)">
                     <i class="fab fa-whatsapp" style="font-size: 24px; color: #25D366; margin-right: 10px;"></i>
                 </a>
-                <a href="mailto:atencionalusuario@unad.edu.co">
+                <a href="mailto:atencionalusuario@unad.edu.co" title="Enviar correo electrónico a atención al usuario">
                     <i class="fas fa-envelope" style="font-size: 24px; color: #FF5733;"></i>
                 </a>
             </div>
             
-            <h4>Consulte todos los canales de atención <a href="https://directorio.unad.edu.co/" target="_blank" style="color: #F1C40F; text-decoration: underline;">AQUÍ</a>.</h4>
+            <h4>Consulte todos los canales de atención <a href="https://directorio.unad.edu.co/" target="_blank" title="Consultar el directorio de canales de atención de la UNAD (se abre en una nueva pestaña)">AQUÍ</a>.</h4>
             
         </div>
     </section>
@@ -232,44 +255,13 @@
     <p>&copy; 2025 UNAD Start. Andres Martinez.</p>
 </footer>
 
-<script>
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
+<!-- Mover todo el script a script.js y solo referenciar el archivo externo -->
+<script src="script.js"></script>
 
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active'); // Alternar la clase 'active' en el menú
-});
-
-// Cerrar el menú al hacer clic fuera de él
-document.addEventListener('click', (event) => {
-    const isClickInside = navMenu.contains(event.target) || hamburger.contains(event.target);
-    if (!isClickInside) {
-        navMenu.classList.remove('active'); // Cierra el menú si el clic fue fuera
-    }
-});
-
-// Agregar evento a los enlaces del menú
-const navLinks = document.querySelectorAll('.nav-menu a');
-navLinks.forEach(link => {
-    link.addEventListener('click', (event) => {
-        event.preventDefault(); 
-        navMenu.classList.remove('active'); // Ocultar el menú
-
-        const targetId = link.getAttribute('href'); 
-        const targetElement = document.querySelector(targetId);
-        const navbarHeight = document.querySelector('.navbar').offsetHeight; 
-
-        // Desplazarse suavemente a la sección
-        window.scrollTo({
-            top: targetElement.offsetTop - navbarHeight, 
-            behavior: 'smooth' // Desplazamiento suave
-        });
-
-        // Asegura de que el título sea visible
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-});
-</script>
+<!-- Botón de Volver al Inicio -->
+<button id="back-to-top" class="back-to-top" aria-label="Volver al inicio">
+    <i class="fas fa-arrow-up"></i>
+</button>
 
 </body>
 </html>

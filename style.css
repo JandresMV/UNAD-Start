@@ -12,28 +12,35 @@
     height: 50px; /* Altura de la barra de navegación */
     display: flex; /* Utiliza flexbox para alinear los elementos dentro de la barra */
     align-items: center; /* Centra verticalmente los elementos dentro de la barra */
-    justify-content: flex-start; 
+    justify-content: flex-start; /* Alinea los elementos al inicio por defecto (escritorio) */
     overflow: visible; /* Permite que el contenido desbordado sea visible */
+    /* Añadir gap para espacio entre elementos si es necesario */
+    gap: 15px; /* Espacio entre los elementos flexibles directos (menú, contenedor derecha) */
 }
 
 /* Estilos para el menú */
 .nav-menu {
-    display: flex; /* Utiliza flexbox para alinear los elementos del menú */
+    display: flex; /* Muestra el menú como flexbox horizontal por defecto (escritorio) */
     list-style-type: none; /* Elimina los puntos de la lista */
-    margin: 0; /* Elimina el margen por defecto */
+    margin: 0; /* Elimina el margen para un mejor control con flexbox */
     padding: 0; /* Elimina el padding por defecto */
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: static; /* O auto, flex maneja la posición */
+    transform: none; /* Eliminar transformación para escritorio */
+    flex-grow: 1; /* Permite que el menú ocupe el espacio restante en la navbar */
+    justify-content: center; /* Centra los elementos del menú horizontalmente en escritorio */
     overflow: visible; /* Permite que el contenido desbordado sea visible */
     flex-wrap: nowrap; /* Evita que los elementos se envuelvan en varias líneas */
     white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-    flex-grow: 1; /* Permite que el menú ocupe el espacio restante */
+    /* min-width: 0; */ /* Añadir si los elementos del menú se desbordan */
 }
 
 .nav-menu li {
     margin-right: 20px; /* Espaciado a la derecha entre los elementos del menú */
     align-items: center;
+}
+
+.nav-menu li:last-child {
+    margin-right: 0; /* Elimina el margen derecho del último elemento */
 }
 
 .nav-menu a {
@@ -45,48 +52,235 @@
     font-family: 'Roboto', sans-serif; /* Fuente utilizada para el texto */
 }
 
-.nav-menu a:hover {
-    color: #F1C40F; /* Color del texto al pasar el mouse sobre el enlace */
-    background-color: #004669; /* Color de fondo al pasar el mouse sobre el enlace */
-    border-radius: 25px; /* Bordes redondeados para el fondo del enlace */
+.nav-menu a:hover,
+.nav-menu a:focus,
+.nav-menu a.active {
+    color: #F1C40F; /* Color amarillo UNAD */
+    /* background-color: #004669; */
+    /* border-radius: 25px; */
+    outline: none; /* Opcional: remueve el contorno por defecto en focus */
 }
 
-/* Menú hamburguesa */
+/* Menú hamburguesa - Oculto por defecto en escritorio */
 .hamburger {
-    display: block; /* Muestra el menú hamburguesa en pantallas pequeñas */
+    display: none; /* Oculta el menú hamburguesa en pantallas de escritorio */
     font-size: 30px; /* Tamaño de la fuente del icono de menú hamburguesa */
     background: none; /* Sin fondo */
     border: none; /* Sin borde */
     cursor: pointer; /* Cambia el cursor a puntero al pasar el mouse */
     color: #ffcc00; /* Color del icono de menú hamburguesa */
     line-height: 50px; /* Alinea verticalmente el ícono con la altura de la barra de navegación */
-    margin-left: 10px; /* Alinea el ícono a la izquierda con un margen */
-    position: absolute; /* Cambia a posición absoluta */
-    left: 20px; /* Alinea el menú hamburguesa a la izquierda */
+    margin-left: 10px; /* Añade margen a la izquierda del hamburguesa (en escritorio está hidden, pero en móvil lo usaremos) */
 }
 
-/* Responsive cambio de tamaño de pantallas */
-@media (max-width: 1100px) {
+/* Nuevo contenedor para los iconos de la derecha (escritorio y móvil) */
+.right-icons-container {
+    display: flex; /* Usa flexbox para alinear los elementos internos (búsqueda y contraste) */
+    align-items: center; /* Centra verticalmente los iconos */
+    gap: 5px; /* Espacio entre la caja de búsqueda y el botón de contraste */
+    /* En escritorio, empujarlo a la derecha si el menú no ocupa todo el espacio */
+    margin-left: auto;
+    order: unset; /* Asegurarse de que no tenga un order que interfiera en escritorio */
+}
+
+/* Estilos para la caja de búsqueda */
+.search-container {
+    /* margin-left: auto; */ /* No es necesario con flexbox gap y justify-content space-between si está entre nav-menu y btn-contraste */
+    padding: 0; /* Ajustar padding */
+    display: flex; /* Usar flexbox para alinear el input y el posible icono */
+    align-items: center; /* Centrar verticalmente el contenido */
+    position: relative; /* Añadido para posicionar el icono */
+    /* width: auto; */ /* Ajuste para flexbox */
+    /* background-color: red; */ /* Para depuración */
+    /* Ajustar el orden en flexbox si es necesario, aunque la estructura HTML ya ayuda */
+    order: unset; /* Eliminar el order, ya se controla por el contenedor padre */
+}
+
+.search-container input[type="text"] {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 0.9em;
+    outline: none; /* Remover contorno al enfocar */
+    width: 150px; /* Ancho por defecto en escritorio */
+    margin-right: 5px; /* Espacio entre el input y el icono */
+    transition: width 0.3s ease, opacity 0.3s ease; /* Transición suave */
+}
+
+.search-container input[type="text"]:focus {
+    border-color: #F1C40F; /* Borde amarillo al enfocar */
+    box-shadow: 0 0 3px rgba(241, 196, 15, 0.5);
+}
+
+/* Estilo para el icono de búsqueda */
+.search-container .fas.fa-search {
+    color: white; /* Cambiado a blanco para que sea visible en el fondo oscuro de la barra */
+    font-size: 1em;
+    cursor: pointer; /* Indica que es clickable */
+    /* margin-left: -25px; */ /* Eliminar el margen negativo */
+    position: static; /* Eliminar posicionamiento relativo */
+    z-index: 1; /* Asegurar que está por encima del input */
+    transition: color 0.3s ease; /* Transición suave solo para color */
+    /* Asegurar alineación vertical */
+    line-height: 1; /* Ajustar altura de línea para alinear con el input */
+}
+
+.search-container .fas.fa-search:hover {
+     color: #F1C40F; /* Cambiar color al pasar el mouse (amarillo UNAD) */
+}
+
+/* Estilos para el nuevo botón de contraste */
+.btn-contraste {
+    font-size: 24px; /* Tamaño del icono */
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #F1C40F; /* Color amarillo UNAD */
+    line-height: 50px; /* Alinea verticalmente con la navbar */
+    padding: 0 10px; /* Espaciado */
+    transition: color 0.3s ease; /* Transición suave */
+    order: unset; /* Eliminar el order, ya se controla por el contenedor padre */
+}
+
+.btn-contraste:hover,
+.btn-contraste:focus {
+    color: white; /* Color blanco al pasar el mouse/enfocar */
+    outline: none;
+}
+
+/* Responsive - Estilos para pantallas pequeñas (hasta 1359px) */
+@media (max-width: 1359px) { /* Cambiado de 768px a 1359px */
+    /* Ajustar la barra de navegación para pantallas pequeñas */
+    .navbar {
+        justify-content: flex-start; /* Alinea los elementos al inicio */
+        padding: 0 5px; /* Reducir el padding de la navbar para acercar los iconos a los bordes */
+        gap: 5px; /* Reducir el gap entre los elementos principales (hamburguesa y contenedor derecha) */
+    }
+
+    /* Mostrar el botón hamburguesa */
+    .hamburger {
+        display: block; /* Muestra el menú hamburguesa en pantallas pequeñas */
+        position: static; /* Cambiar a static para que flexbox lo posicione */
+        order: 1; /* Ordena el hamburguesa primero */
+        margin-left: 0; /* Eliminar margen izquierdo, usar padding del navbar */
+        z-index: 1001; /* Asegura que esté por encima del menú desplegado */
+        /* left: 20px; */ /* Eliminar */
+        /* margin-left: 10px; */ /* Eliminar */
+    }
+
+    /* Ajustar la posición del botón de contraste en móvil */
+    .btn-contraste {
+        /* margin-left: auto; */ /* No es necesario con flexbox y order */
+        padding-right: 0px; /* Eliminar padding derecho, usar padding del navbar */
+        order: unset; /* Eliminar el order, ya se controla por el contenedor padre */
+    }
+
+    /* Ocultar el menú de navegación por defecto en móvil */
     .nav-menu {
-        display: none; /* Oculta el menú en pantallas pequeñas */
+        display: none; /* Oculta el menú en pantallas pequeñas por defecto */
         flex-direction: column; /* Cambia la dirección del menú a columna */
         position: fixed; /* Fija el menú en la pantalla */
         background-color: #004669; /* Color de fondo del menú */
         width: 250px; /* Ancho del menú */
         height: 100%; /* Altura del menú */
-        top: 0; /* Posiciona el menú en la parte superior */
+        top: 50px; /* Posiciona el menú justo debajo de la navbar */
         left: -250px; /* Inicialmente oculta el menú fuera de la pantalla */
-        transition: left 0.3s; /* Transición suave para mostrar el menú */
+        transition: left 0.3s ease; /* Transición suave para mostrar el menú */
         padding: 10px; /* Espaciado interno del menú */
-        min-height: 60px; /* Altura mínima del menú */
-        transform: none;
+        min-height: calc(100% - 50px); /* Altura mínima ajustada a la altura de la navbar */
+        transform: none; /* Eliminar transformación */
+        z-index: 1000; /* Asegura que esté por encima del contenido */
+        overflow-y: auto; /* Permite scroll si el menú es muy largo */
+        align-items: stretch; /* Hace que los items se estiren para llenar el ancho del contenedor */
+        justify-content: flex-start; /* Alinea los elementos del menú a la parte superior */
+        order: 4; /* Enviarlo al final del orden flexbox, ya que se posiciona absoluto cuando está activo */
     }
 
+    /* Mostrar el menú cuando tiene la clase 'active' (toggle por JS) */
     .nav-menu.active {
         left: 0; /* Mueve el menú a la vista cuando está activo */
-        display: flex; /* Muestra el menú */
-        transform: none;
+        display: flex; /* Muestra el menú (flex para columna) */
     }
+
+    /* Ajustar margen en elementos del menú en móvil */
+    .nav-menu li {
+        margin-right: 0;
+        margin-bottom: 10px; /* Espacio entre elementos del menú en columna */
+    }
+
+    .nav-menu a {
+        width: 100%; /* Ocupa todo el ancho del contenedor del menú */
+        text-align: left; /* Alinea el texto de los enlaces a la izquierda */
+        padding: 10px 15px; /* Ajusta el padding */
+        /* Aseguramos que los estilos hover/focus/active se apliquen */
+        /* No necesitamos redefinirlos si ya están fuera de la media query, */
+        /* a menos que queramos un estilo DIFERENTE en móvil. */
+        /* Si quieres el mismo efecto, la regla .nav-menu a:hover, :focus, .active de arriba es suficiente */
+    }
+
+    /* Ajustar el contenido principal para evitar que se oculte detrás del menú fijo */
+    .main {
+        margin-top: 50px; /* Añade un margen superior igual a la altura de la navbar */
+    }
+
+    /* Nuevo contenedor para los iconos de la derecha */
+    .right-icons-container {
+        display: flex; /* Usa flexbox para alinear los elementos internos (búsqueda y contraste) */
+        align-items: center; /* Centra verticalmente los iconos */
+        order: 2; /* Posiciona este contenedor a la derecha del hamburguesa */
+        margin-left: auto; /* Empuja este contenedor y su contenido a la derecha */
+        /* margin-right: 5px; */ /* Puedes ajustar si es necesario, o confiar en el padding del btn-contraste */
+        gap: 5px; /* Espacio entre la caja de búsqueda y el botón de contraste en móvil */
+    }
+
+    /* Mantener el contenedor de búsqueda visible en pantallas pequeñas */
+    .search-container {
+        /* display: none; */ /* Eliminar esto */
+        /* margin-left: auto; */ /* No es necesario */
+        justify-content: flex-end; /* Alinea el contenido a la derecha dentro del contenedor */
+        padding-right: 0px; /* Eliminar o ajustar padding a la derecha */
+        order: unset; /* Eliminar el order, ya se controla por el contenedor padre */
+         /* Permite que la caja se contraiga */
+         flex-shrink: 1;
+         /* Asegurar que no haya un ancho mínimo que fuerce el desbordamiento */
+         min-width: 0;
+         /* Añadir un poco de margen a la derecha para separarlo del botón de contraste */
+         margin-right: 0; /* Eliminar este margen, ya se controla con gap en right-icons-container */
+    }
+
+    /* Ocultar el campo de texto de búsqueda por defecto en pantallas pequeñas */
+    .search-container input[type="text"] {
+        width: 0; /* Ancho inicial 0 */
+        opacity: 0; /* Completamente transparente */
+        visibility: hidden; /* Oculto para accesibilidad */
+        padding: 5px 0px; /* Ajusta padding horizontal a 0 cuando está oculto */
+        margin-right: 0; /* Quitar el margen a la derecha del input cuando está oculto */
+    }
+
+    /* Mostrar el campo de texto y ajustar su estilo cuando el contenedor tiene la clase 'expanded' */
+    .search-container.expanded input[type="text"] {
+        width: 150px; /* O el ancho deseado en móvil */
+        opacity: 1;
+        visibility: visible;
+        padding: 5px 10px; /* Restaurar padding */
+        margin-right: 5px; /* Restaurar margen para separar del ícono */
+    }
+
+    /* Posicionar el ícono de la lupa en móvil */
+    .search-container .fas.fa-search {
+         margin-left: 0; /* Quitar el margen negativo en móvil */
+         position: static; /* Quitar el posicionamiento relativo en móvil */
+         /* Asegurar que el color sea visible en modo alto contraste en móvil */
+         /* color: white; */ /* Este color se manejará mejor en la regla de alto contraste */
+    }
+
+     /* Opcional: Ocultar el ícono cuando el campo está expandido (si quieres que el input ocupe todo el espacio) */
+     /* Si quieres que el ícono se quede, no añadas esta regla */
+     /*
+     .search-container.expanded .fas.fa-search {
+         display: none;
+     }
+     */
 }
 
 body {
@@ -98,13 +292,15 @@ body {
 
 /* Estilos para el contenido principal */
 .main {
+    margin-top: 50px; /* Ajusta el margen superior del contenido principal por la navbar fija */
     display: flex; /* Utiliza flexbox para organizar el contenido principal */
     flex-direction: column; /* Organiza el contenido en una columna */
     align-items: center; /* Centra horizontalmente los elementos dentro del contenedor */
     text-align: center; /* Centra el texto dentro del contenedor */
     padding: 20px; /* Espaciado interno de 20px */
     max-width: 1200px; /* Ancho máximo del contenido principal */
-    margin: 0 auto; /* Centra el contenido principal horizontalmente */
+    margin-left: auto; /* Centra el contenido principal horizontalmente */
+    margin-right: auto;
     flex: 1; /* Permite que el contenido principal crezca y ocupe el espacio disponible */
 }
 
@@ -282,6 +478,8 @@ p {
 /* Aplicar la clase unificada a las secciones */
 .section-container-1, .section-container-2 {
     composes: section-container; /* Usar la clase unificada */
+    opacity: 0; /* Asegurar que estén invisibles antes de la animación */
+    animation: fadeInUp 1s ease-out forwards; /* Aplicar la animación: nombre, duración, tipo de aceleración, mantener estado final */
 }
 
 /* Estilos para imágenes */
@@ -295,18 +493,462 @@ img:hover {
     transform: scale(1.05); /* Aumenta el tamaño de la imagen al 105% al pasar el mouse */
 }
 
-/* Estilos responsivos */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column; /* Cambia la dirección de la barra de navegación en pantallas pequeñas */
-    }
+/* Estilos para la nueva sección de Introducción */
+#introduccion {
+    /* Mantener margen superior para dejar espacio para la barra de navegación fija */
+    /* En escritorio 70px está bien, en móvil 50px (altura de navbar) + padding de main(20px) */
+    /* Como main ya tiene margin-top: 50px en móvil, y section-content tiene 20px arriba/abajo */
+    /* podríamos ajustar este margen o confiar en el padding de section-content y el margin-top de main */
+    margin-top: 0; /* Eliminar margen superior específico aquí y confiar en el padding/margin de los contenedores */
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 0.1s; /* Un pequeño retraso para la primera sección */
+}
 
-    .nav-menu {
-        flex-direction: column; /* Cambia el menú a columna en pantallas pequeñas */
-        align-items: center; /* Centra los elementos del menú */
-    }
+/* Estilos para el botón de ayuda */
+.btn-ayuda {
+    display: block; /* Ocupa su propia línea */
+    margin: 20px auto; /* Centra el botón y añade margen */
+    padding: 10px 20px; /* Espaciado interno */
+    background-color: #F1C40F; /* Color amarillo UNAD */
+    color: #004669; /* Color azul UNAD para el texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor a puntero */
+    font-size: 1.1em; /* Tamaño de fuente */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+    font-family: 'Roboto', sans-serif; /* Usar una fuente consistente */
+}
 
+.btn-ayuda:hover,
+.btn-ayuda:focus { /* Ya tenías :focus, se mantiene y revisa */
+    background-color: #e0b000; /* Color amarillo más oscuro al pasar el ratón/enfocar */
+    color: #00334e; /* Color azul más oscuro */
+    outline: none; /* Opcional: remover el contorno por defecto en focus si el hover ya es claro */
+    text-decoration: none; /* Asegurar que no aparezca subrayado si el navegador lo añade por defecto al enfocar */
+}
+
+/* Estilos para el contenedor de ayuda de navegación */
+.ayuda-navegacion {
+    background-color: rgba(236, 240, 241, 0.9); /* Fondo gris claro con opacidad */
+    border-left: 5px solid #F1C40F; /* Borde izquierdo amarillo */
+    padding: 15px; /* Espaciado interno */
+    margin: 20px auto; /* Espaciado externo, centrado */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
+    max-width: 800px; /* Ancho máximo */
+    text-align: left; /* Texto alineado a la izquierda */
+    line-height: 1.6; /* Altura de línea */
+    font-family: 'Roboto', sans-serif; /* Usar una fuente consistente */
+}
+
+.ayuda-navegacion h3 {
+    color: #004669; /* Color azul para el título */
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center; /* Centra el título dentro del contenedor */
+}
+
+.ayuda-navegacion p {
+    margin-bottom: 10px; /* Espacio entre párrafos */
+    padding: 0; /* Elimina padding del párrafo dentro de este div */
+    text-align: left; /* Asegura que el texto de los párrafos esté a la izquierda */
+    /* Hereda font-size y line-height del contenedor si no se especifica */
+}
+
+/* Clase para ocultar elementos */
+.hidden {
+    display: none;
+}
+
+/* Estilos para enlaces dentro del contenido principal (párrafos, listas, h4) */
+.main a { /* Selecciona todos los enlaces dentro de main */
+    color: #004669; /* Color por defecto para enlaces en el contenido */
+    text-decoration: underline; /* Subrayado por defecto */
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Transición suave */
+}
+
+.main a:hover,
+.main a:focus {
+    color: #F1C40F; /* Cambia el color al pasar el mouse o enfocar */
+    text-decoration: none; /* Opcional: quitar subrayado en hover/focus */
+    outline: none; /* Opcional: remueve el contorno */
+}
+
+/* Estilos específicos para enlaces en el contenedor de contacto */
+.contacto a {
+    color: white; /* Color por defecto de los enlaces en la sección de contacto */
+    text-decoration: underline; /* Subrayado por defecto */
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.contacto a:hover,
+.contacto a:focus {
+    color: #F1C40F; /* Color amarillo UNAD al pasar el mouse o enfocar */
+    text-decoration: none; /* Quitar subrayado en hover/focus */
+    outline: none;
+}
+
+/* Estilos para los íconos de contacto (enlaces) */
+.contact-icons a {
+    /* Los estilos de color y margen estaban inline, los movemos aquí */
+    color: #25D366; /* Color por defecto para íconos de contacto (WhatsApp) */
+    margin-right: 10px;
+    font-size: 24px; /* Tamaño del ícono */
+    text-decoration: none; /* Elimina el subrayado de los íconos-enlace */
+    transition: color 0.3s ease, transform 0.3s ease; /* Añadir transición para el tamaño */
+    display: inline-block; /* Para que transform funcione correctamente */
+}
+
+/* Estilo específico para el ícono de correo */
+.contact-icons a[href^="mailto:"] {
+    color: #FF5733; /* Color por defecto para ícono de correo */
+    margin-right: 0; /* Ajustar margen si es el último */
+}
+
+.contact-icons a:hover,
+.contact-icons a:focus {
+    color: #F1C40F; /* Cambia el color del ícono al pasar el mouse o enfocar */
+    transform: scale(1.2); /* Hace el ícono un poco más grande */
+    outline: none;
+}
+
+/* Ajustar el margen derecho del último ícono manualmente si es necesario,
+   o asegurarnos de que el margin-right: 10px solo aplique a los que no son mailto si hay varios */
+.contact-icons a:last-child {
+    margin-right: 0;
+}
+
+/* Asegurar que los enlaces dentro de .paragraph-container y .custom-list se comporten bien */
+.paragraph-container a,
+.custom-list a {
+    /* Heredan los estilos .main a, pero podemos refinar si es necesario */
+}
+
+/* Clases para el modo de alto contraste */
+body.high-contrast {
+    background-color: black !important; /* Fondo negro */
+    color: white !important; /* Texto blanco por defecto */
+    /* Asegurarnos de que todas las secciones tengan un fondo que cambie */
+}
+
+/* Aplicar estilos de contraste a contenedores principales y secciones */
+body.high-contrast .main,
+body.high-contrast .section-container-1,
+body.high-contrast .section-container-2,
+body.high-contrast .section-content, /* Añadimos section-content por si acaso */
+body.high-contrast .footer {
+     background-color: #1a1a1a !important; /* Un negro un poco más claro para las áreas principales */
+     color: white !important; /* Asegurar texto blanco en estas áreas */
+}
+
+
+body.high-contrast .navbar {
+     background-color: #1a1a1a !important; /* Un negro un poco más claro para la barra */
+     /* color: white !important; */ /* El color del texto en la navbar ya se maneja en .nav-menu a */
+}
+
+body.high-contrast .nav-menu {
+    background-color: #1a1a1a !important; /* Un negro un poco más claro para el menú desplegable */
+    /* color: white !important; */ /* El color del texto ya se maneja en .nav-menu a */
+}
+
+/* Asegurar que los títulos cambien de color */
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3,
+body.high-contrast h4 {
+    color: white !important; /* Títulos en blanco */
+}
+
+/* Estilos para contenedores de párrafo y listas */
+body.high-contrast .paragraph-container,
+body.high-contrast .custom-list {
+    background-color: #333 !important; /* Fondo oscuro */
+    border-color: white !important; /* Borde blanco */
+    color: white !important; /* Asegurar texto blanco dentro de estos contenedores */
+}
+
+/* Estilos para enlaces dentro del contenido */
+body.high-contrast .main a,
+body.high-contrast .paragraph-container a, /* Ser más específico si es necesario */
+body.high-contrast .custom-list a {      /* Ser más específico si es necesario */
+    color: yellow !important; /* Enlaces en amarillo brillante */
+    text-decoration: underline !important; /* Subrayado claro */
+}
+
+body.high-contrast .main a:hover,
+body.high-contrast .main a:focus,
+body.high-contrast .paragraph-container a:hover,
+body.high-contrast .paragraph-container a:focus,
+body.high-contrast .custom-list a:hover,
+body.high-contrast .custom-list a:focus {
+    color: #ffff00 !important; /* Amarillo más brillante en hover/focus */
+    text-decoration: none !important; /* Quitar subrayado en hover/focus si se desea */
+    outline: 2px solid yellow !important; /* Contorno amarillo para enfoque */
+}
+
+/* Estilos para el botón de ayuda */
+body.high-contrast .btn-ayuda {
+     background-color: yellow !important; /* Botón en amarillo */
+     color: black !important; /* Texto del botón en negro */
+     border-color: white !important; /* Borde blanco */
+}
+
+body.high-contrast .btn-ayuda:hover,
+body.high-contrast .btn-ayuda:focus {
+     background-color: #ffff00 !important; /* Amarillo más brillante */
+     color: black !important;
+     outline-color: white !important;
+}
+
+/* Estilos para la sección de contacto */
+body.high-contrast .contacto {
+    background-color: #1a1a1a !important; /* Fondo oscuro para contacto */
+    color: white !important; /* Texto blanco */
+}
+
+body.high-contrast .contacto h4 {
+     color: white !important; /* Título en blanco */
+}
+
+/* Estilos para enlaces en la sección de contacto */
+body.high-contrast .contacto a {
+    color: yellow !important; /* Enlaces en amarillo */
+    text-decoration: underline !important; /* Subrayado claro */
+}
+
+body.high-contrast .contacto a:hover,
+body.high-contrast .contacto a:focus {
+    color: white !important; /* Enlaces en blanco en hover/focus */
+    text-decoration: none !important;
+    outline-color: yellow !important;
+}
+
+
+/* Estilos para los íconos de contacto (enlaces) */
+body.high-contrast .contact-icons a {
+    color: yellow !important; /* Íconos en amarillo */
+    /* Si quieres mantener los colores específicos de WhatsApp/correo, puedes quitarel !important aquí */
+    /* o definir reglas body.high-contrast .contact-icons a.whatsapp-icon {} body.high-contrast .contact-icons a.email-icon {} */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+body.high-contrast .contact-icons a:hover,
+body.high-contrast .contact-icons a:focus {
+    color: white !important; /* Íconos en blanco en hover/focus */
+    outline: 2px solid yellow !important; /* Contorno amarillo */
+}
+
+
+body.high-contrast .footer {
+    background-color: #1a1a1a !important; /* Fondo oscuro para el pie de página */
+    color: white !important; /* Texto blanco */
+}
+
+/* Las imágenes pueden necesitar tratamiento especial */
+body.high-contrast img {
+    /* Añadimos un filtro para invertir colores, puede ayudar pero a veces distorsiona */
+    /* filter: invert(100%) hue-rotate(180deg) contrast(1.5); */
+    /* O simplemente un borde para destacarlas sobre fondo oscuro */
+    border: 1px solid white; /* Opcional: añadir borde blanco a imágenes */
+}
+
+body.high-contrast .nav-menu a {
+     color: white !important; /* Color blanco por defecto en alto contraste */
+}
+
+body.high-contrast .nav-menu a:hover,
+body.high-contrast .nav-menu a:focus,
+body.high-contrast .nav-menu a.active { /* Añadimos .active aquí también */
+     color: yellow !important; /* Enlaces en amarillo en alto contraste */
+     outline: 2px solid yellow !important; /* Contorno amarillo para enfoque/activo */
+}
+
+body.high-contrast .search-container input[type="text"] {
+     background-color: #333 !important; /* Fondo oscuro */
+     color: white !important; /* Texto blanco */
+     border-color: white !important; /* Borde blanco */
+}
+
+body.high-contrast .search-container input[type="text"]:focus {
+     border-color: yellow !important; /* Borde amarillo al enfocar */
+     box-shadow: 0 0 3px rgba(255, 255, 0, 0.8) !important;
+}
+
+/* Estilo para el icono en alto contraste */
+body.high-contrast .search-container .fas.fa-search {
+     color: white !important; /* Ícono en blanco en alto contraste */
+}
+body.high-contrast .search-container .fas.fa-search:hover {
+     color: yellow !important; /* Ícono en amarillo en hover */
+}
+
+/* Animación de aparición suave con desplazamiento hacia arriba */
+@keyframes fadeInUp {
+    from {
+        opacity: 0; /* Empieza completamente invisible */
+        transform: translateY(20px); /* Empieza 20px más abajo de su posición final */
+    }
+    to {
+        opacity: 1; /* Termina completamente visible */
+        transform: translateY(0); /* Termina en su posición original */
+    }
+}
+
+/* Añadir un ligero retraso a secciones subsiguientes para un efecto escalonado */
+.main section:nth-child(2) { /* La segunda sección en main (después de #introduccion) */
+    animation-delay: 0.2s;
+}
+
+.main section:nth-child(3) { /* La tercera sección */
+    animation-delay: 0.4s;
+}
+
+.main section:nth-child(4) { /* La cuarta sección */
+    animation-delay: 0.6s;
+}
+
+.main section:nth-child(5) { /* La quinta sección */
+    animation-delay: 0.8s;
+}
+
+.main section:nth-child(6) { /* La sexta sección */
+    animation-delay: 1.0s;
+}
+
+/* Estilos para el botón de Volver al Inicio */
+.back-to-top {
+    position: fixed; /* Fija el botón en la ventana */
+    bottom: 20px; /* A 20px del borde inferior */
+    right: 20px; /* A 20px del borde derecho */
+    background-color: #004669; /* Color de fondo UNAD azul */
+    color: white; /* Color del ícono */
+    border: none;
+    border-radius: 5px; /* Bordes ligeramente redondeados */
+    padding: 10px 15px; /* Espaciado interno */
+    font-size: 1.2em; /* Tamaño del ícono */
+    cursor: pointer; /* Cursor de puntero */
+    z-index: 999; /* Asegura que esté por encima de la mayoría de los elementos */
+    opacity: 0; /* Inicialmente invisible */
+    visibility: hidden; /* Oculto para que no sea interactuable cuando es invisible */
+    transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Asegurar transición para color/fondo */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+/* Estilo para mostrar el botón */
+.back-to-top.show {
+    opacity: 1; /* Completamente visible */
+    visibility: visible; /* Habilitado para interacción */
+}
+
+/* Estilos de hover/focus para el botón */
+.back-to-top:hover,
+.back-to-top:focus {
+    background-color: #F1C40F; /* Cambia a amarillo UNAD al pasar el mouse/enfocar */
+    color: #004669; /* Cambia el color del ícono a azul UNAD */
+    outline: none; /* Remover contorno por defecto */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Opcional: hacer la sombra un poco más pronunciada */
+}
+
+/* Ajustes para modo alto contraste */
+body.high-contrast .back-to-top {
+    background-color: yellow !important; /* Fondo amarillo brillante */
+    color: black !important; /* Texto/ícono negro */
+    border-color: white !important; /* Borde blanco */
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3) !important; /* Sombra blanca en alto contraste */
+}
+
+body.high-contrast .back-to-top:hover,
+body.high-contrast .back-to-top:focus {
+    background-color: #ffff00 !important; /* Amarillo más brillante */
+    color: white !important; /* Ícono en blanco para más contraste */
+    outline: 2px solid white !important; /* Contorno blanco para enfoque */
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5) !important; /* Sombra más pronunciada en alto contraste */
+}
+
+/* Asegurar estilos de alto contraste también en el estado expandido móvil */
+@media (max-width: 1359px) { /* Cambiado de 768px a 1359px */
+     body.high-contrast .search-container.expanded input[type="text"] {
+         background-color: #333 !important; /* Fondo oscuro */
+         color: white !important; /* Texto blanco */
+         border-color: white !important; /* Borde blanco */
+     }
+
+     body.high-contrast .search-container.expanded input[type="text"]:focus {
+         border-color: yellow !important;
+         box-shadow: 0 0 3px rgba(255, 255, 0, 0.8) !important;
+     }
+
+     body.high-contrast .search-container .fas.fa-search {
+          color: white !important; /* Asegurar color blanco para el icono en HC móvil */
+     }
+      body.high-contrast .search-container .fas.fa-search:hover {
+           color: yellow !important; /* Asegurar color amarillo en hover HC móvil */
+      }
+
+      /* En móvil, asegurar que el icono de búsqueda en modo normal también tenga buen contraste */
+      body:not(.high-contrast) .search-container .fas.fa-search {
+           color: white; /* O el color que prefieras en la barra azul */
+      }
+       body:not(.high-contrast) .search-container .fas.fa-search:hover {
+            color: #F1C40F; /* Color amarillo en hover */
+       }
+}
+
+/* Añadir un media query para pantallas grandes (mayor a 1359px) */
+@media (min-width: 1360px) {
+    /* Ocultar el menú hamburguesa en pantallas grandes */
     .hamburger {
-        display: block; /* Muestra el menú hamburguesa en pantallas pequeñas */
+        display: none;
     }
+
+    /* Mostrar el menú de navegación horizontal */
+    .nav-menu {
+        display: flex;
+        /* Resto de estilos ya están en la regla general */
+    }
+
+    /* Ajustar la barra de navegación para escritorio */
+    .navbar {
+        justify-content: flex-start; /* Alinea al inicio */
+        padding: 0 20px; /* Restaurar padding de escritorio */
+        gap: 15px; /* Restaurar gap de escritorio */
+    }
+
+     /* Asegurar que el contenedor de iconos de la derecha esté a la derecha en escritorio */
+    .right-icons-container {
+        display: flex; /* Asegurar que sea flexbox */
+        align-items: center; /* Centrar verticalmente */
+        margin-left: auto; /* Empujar a la derecha */
+        gap: 5px; /* Espacio entre búsqueda y contraste */
+    }
+
+     /* Asegurar que la caja de búsqueda esté visible y con ancho completo en escritorio */
+     .search-container {
+         display: flex; /* Asegurar display flex */
+         width: auto; /* Restaurar ancho automático si se cambió en móvil */
+         opacity: 1; /* Asegurar visibilidad */
+         visibility: visible; /* Asegurar visibilidad */
+         padding: 0; /* Ajustar padding si es necesario */
+         /* margin-right: 0; */ /* Eliminar márgenes que puedan venir de móvil */
+     }
+
+     .search-container input[type="text"] {
+          width: 150px; /* Restaurar ancho en escritorio */
+          padding: 5px 10px; /* Restaurar padding */
+          margin-right: 5px; /* Espacio entre input y lupa */
+     }
+
+      /* Asegurar que la lupa sea visible en escritorio */
+     .search-container .fas.fa-search {
+         display: inline-block; /* Asegurar que se muestre */
+         /* color ya se cambió arriba a white */
+     }
+
+     /* Asegurar que el botón de contraste sea visible en escritorio */
+     .btn-contraste {
+          display: inline-block; /* Asegurar que se muestre */
+          padding: 0 10px; /* Restaurar padding */
+     }
 }
