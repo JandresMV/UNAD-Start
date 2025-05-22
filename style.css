@@ -952,3 +952,19 @@ body.high-contrast .back-to-top:focus {
           padding: 0 10px; /* Restaurar padding */
      }
 }
+
+/* Añadir al final de tu archivo style.css o en una sección relevante */
+.image-citation {
+    font-size: 0.6em; /* Tamaño de fuente más pequeño */
+    color: #555; /* Color gris oscuro */
+    text-align: center; /* Centra el texto */
+    margin-top: 0; /* Espacio pequeño arriba de la cita */
+    margin-bottom: 10px; /* Espacio abajo de la cita (reducido) */
+    font-style: italic; /* Opcional: hacer la fuente itálica */
+}
+
+/* Estilos para alto contraste */
+body.high-contrast .image-citation {
+    color: white !important; /* Texto blanco en alto contraste */
+    font-style: normal !important; /* Opcional: no itálica en alto contraste si prefieres */
+}
